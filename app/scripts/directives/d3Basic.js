@@ -3,8 +3,9 @@
 
   angular.module('myApp.directives')
     .directive('d3Bars', ['d3', function(d3) {
-      var getColor = function() {
-        var color = getColor.scale(Math.random()*10);
+      var getColor = function(d) {
+        var color = getColor.scale(d.name || d.title || Math.random());
+        console.log(d.name, d);
         return color;
       }
       getColor.scale = d3.scale.category10();
