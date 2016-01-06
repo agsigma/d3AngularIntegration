@@ -3,6 +3,12 @@
 
   angular.module('myApp.directives')
     .directive('d3Bars', ['d3', function(d3) {
+      var getColor = function() {
+        var color = getColor.scale(Math.random()*10);
+        return color;
+      }
+      getColor.scale = d3.scale.category10();
+      
       return {
         restrict: 'EA',
         scope: {
@@ -32,7 +38,7 @@
           }, true);
 
           // define render function
-          scope.render = function(data){
+          scope.render = function(data){1111
             // remove all previous items before render
             //svg.selectAll("*").remove();
 
@@ -54,6 +60,7 @@
               .data(data)
               .enter()
                 .append("rect")
+                .style({"fill": getColor})
                 .on("click", function(d, i){return scope.onClick({item: d});})
                 .attr("height", 30) // height of each bar
                 .attr("width", 0) // initial width of 0 for transition
