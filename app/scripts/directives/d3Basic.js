@@ -34,7 +34,7 @@
           // define render function
           scope.render = function(data){
             // remove all previous items before render
-            svg.selectAll("*").remove();
+            //svg.selectAll("*").remove();
 
             // setup variables
             var width, height, max;
@@ -61,6 +61,14 @@
                 .attr("y", function(d, i){
                   return i * 35;
                 }) // height + margin between bars
+                .transition()
+                  .duration(1000) // time of duration
+                  .attr("width", function(d){
+                    return d.score/(max/width);
+                  }); // width based on scale
+                  
+            svg.selectAll("rect")
+              .data(data)
                 .transition()
                   .duration(1000) // time of duration
                   .attr("width", function(d){
